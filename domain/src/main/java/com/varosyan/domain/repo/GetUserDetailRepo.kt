@@ -1,4 +1,7 @@
 package com.varosyan.domain.repo
 
-class GetUserDetailRepo {
+import com.varosyan.domain.model.UserDetail
+
+interface GetUserDetailRepo {
+    suspend operator fun invoke(username: String): UserDetail
 }

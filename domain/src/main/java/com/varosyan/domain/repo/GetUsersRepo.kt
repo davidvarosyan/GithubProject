@@ -1,4 +1,7 @@
 package com.varosyan.domain.repo
 
-class GetUsersRepo {
+import com.varosyan.domain.model.User
+
+interface GetUsersRepo {
+    suspend operator fun invoke(id: Long): List<User>
 }
