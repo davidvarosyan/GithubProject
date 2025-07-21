@@ -41,6 +41,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.retrofit)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
     implementation(libs.koin.android)
     implementation(project(":domain"))
     implementation(project(":data"))
