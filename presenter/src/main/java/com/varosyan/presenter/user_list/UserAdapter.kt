@@ -9,7 +9,9 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.varosyan.domain.model.User
+import com.varosyan.presenter.R
 import com.varosyan.presenter.databinding.ItemUserBinding
 
 class UserAdapter(
@@ -44,7 +46,12 @@ class UserAdapter(
         fun bind(user: User) {
             login.text = user.userName
             idView.text = "ID: ${user.id}"
-            Glide.with(avatar).load(user.avatar).circleCrop().into(avatar)
+            Glide.with(avatar)
+                .load(user.avatar)
+                .placeholder(R.drawable.account_circle)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .circleCrop()
+                .into(avatar)
             binding.arrowImageView.setOnClickListener { onClick(user) }
         }
     }

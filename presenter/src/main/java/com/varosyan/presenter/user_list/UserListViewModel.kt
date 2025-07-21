@@ -8,7 +8,9 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.varosyan.domain.model.User
 import com.varosyan.domain.usecase.GetUsersUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 
 class UserListViewModel(private val getUsersUseCase: GetUsersUseCase) : ViewModel() {
 
@@ -17,6 +19,7 @@ class UserListViewModel(private val getUsersUseCase: GetUsersUseCase) : ViewMode
         config = PagingConfig(pageSize = 50, initialLoadSize = 50),
         pagingSourceFactory = { UserPagingSource(getUsersUseCase) }
     ).flow
+        .flowOn(Dispatchers.IO)
         .cachedIn(viewModelScope)
 
 

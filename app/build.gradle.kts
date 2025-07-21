@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.safe.args)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -41,6 +43,8 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.koin.android)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     implementation(project(":connector"))
     implementation(project(":presenter"))
     testImplementation(libs.junit)

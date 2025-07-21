@@ -6,6 +6,6 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 internal fun presenterModule() = module {
-    viewModel { UserDetailViewModel(get()) }
+    viewModel { (userName: String) -> UserDetailViewModel(userName, get()) }
     viewModel { UserListViewModel(get()) }
 }

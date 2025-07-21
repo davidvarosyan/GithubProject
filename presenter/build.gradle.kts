@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.safe.args)
 }
 
 android {
@@ -44,6 +45,8 @@ dependencies {
     implementation(libs.paging.common)
     implementation(libs.paging.runtime)
     implementation(libs.glide)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

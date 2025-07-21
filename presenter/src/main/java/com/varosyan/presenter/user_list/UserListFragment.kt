@@ -1,35 +1,30 @@
 package com.varosyan.presenter.user_list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.varosyan.presenter.R
 import com.varosyan.presenter.databinding.FragmentUserListBinding
+import com.varosyan.presenter.user_detail.UserDetailFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UserListFragment : Fragment() {
+class UserListFragment : Fragment(R.layout.fragment_user_list) {
     private val viewModel: UserListViewModel by viewModel()
-    private lateinit var viewBinding:FragmentUserListBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        viewBinding = FragmentUserListBinding.inflate(inflater, container, false)
-        return viewBinding.root
-    }
+    private lateinit var viewBinding: FragmentUserListBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewBinding = FragmentUserListBinding.bind(view)
         val adapter = UserAdapter { user ->
-            // TODO: navigate to details screen
+            val action = UserListFragmentDirections
+                .actionListToDetails(user.userName)
+            findNavController().navigate(action)
         }
 
         val recyclerView = viewBinding.usersRecyclerView
@@ -38,14 +33,9 @@ class UserListFragment : Fragment() {
         recyclerView.addItemDecoration(
             DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         )
-        adapter.addLoadStateListener {listener ->
+        adapter.addLoadStateListener { listener ->
 
         }
-
-        // Optional: Show retry on error
-//        adapter.addLoadStateListener { state: LoadState ->
-//            // handle loading / error states here
-//        }
 
         // Collect and submit data
         viewLifecycleOwner.lifecycleScope.launch {
@@ -53,9 +43,5 @@ class UserListFragment : Fragment() {
                 adapter.submitData(pagingData)
             }
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 }
