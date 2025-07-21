@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.koin.android)
     implementation(project(":connector"))
+    implementation(project(":presenter"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
