@@ -1,7 +1,7 @@
 package com.varosyan.domain.model
 
-class User(
-    val id: Int,
+data class User(
+    val id: Long,
     val avatar: String,
     val userName: String
 )

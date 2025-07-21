@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-private const val BASE_URL = "https://api.example.com/"
+private const val BASE_URL = "https://api.github.com/"
 fun getRetrofitInstance(): Retrofit {
     val gson: Gson = GsonBuilder()
         .setStrictness(Strictness.LENIENT)               // optional: be more forgiving with malformed JSON

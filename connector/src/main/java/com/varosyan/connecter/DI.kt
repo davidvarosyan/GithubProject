@@ -1,3 +1,3 @@
 package com.varosyan.connecter
 
-fun getAppModules() = listOf(domainModule(), presenterModule(), dataModule())
+fun getAppModules() = listOf(dataModule(), domainModule(), presenterModule())
