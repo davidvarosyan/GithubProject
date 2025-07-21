@@ -8,7 +8,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class UserDetailViewModel(
@@ -19,6 +21,7 @@ class UserDetailViewModel(
     val userDetail: SharedFlow<UserDetail> = _userDetail.asSharedFlow()
     private val _loadingState: MutableStateFlow<DetailScreenState> =
         MutableStateFlow(DetailScreenState.Loading)
+    val loadingState: StateFlow<DetailScreenState> = _loadingState.asStateFlow()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {

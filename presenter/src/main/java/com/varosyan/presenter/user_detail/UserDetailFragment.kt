@@ -38,6 +38,16 @@ class UserDetailFragment : Fragment(R.layout.fragment_user_detail) {
         viewBinding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.loadingState.collect { state ->
+                when (state) {
+                    is DetailScreenState.Error -> showErrorMessage(message = state.message)
+                    DetailScreenState.Loading -> showLoading()
+                    DetailScreenState.Success -> hideLoading()
+                }
+            }
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.userDetail.collect { detail ->
                 viewBinding.apply {
@@ -65,6 +75,22 @@ class UserDetailFragment : Fragment(R.layout.fragment_user_detail) {
                 }
             }
         }
+    }
+
+    private fun showLoading() {
+        viewBinding.contentContainer.visibility = View.GONE
+        viewBinding.progressCircular.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading() {
+        viewBinding.contentContainer.visibility = View.VISIBLE
+        viewBinding.progressCircular.visibility = View.GONE
+    }
+
+    private fun showErrorMessage(message: String) {
+        viewBinding.contentContainer.visibility = View.GONE
+        viewBinding.textError.visibility = View.VISIBLE
+        viewBinding.textError.text = message
     }
 
     companion object {
