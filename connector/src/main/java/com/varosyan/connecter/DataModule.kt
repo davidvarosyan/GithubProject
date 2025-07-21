@@ -4,6 +4,7 @@ import com.varosyan.data.db.AppDatabase
 import com.varosyan.data.db.dao.UserDao
 import com.varosyan.data.db.dao.UserDetailDao
 import com.varosyan.data.db.getDatabase
+import com.varosyan.data.mapper.UserDetailMapper
 import com.varosyan.data.network.getRetrofitInstance
 import com.varosyan.data.repo.GetUserDetailRepoImpl
 import com.varosyan.data.repo.GetUsersRepoImpl
@@ -29,9 +30,10 @@ internal fun dataModule() = module {
     single<UserDetailApiService> {
         get<Retrofit>().create(UserDetailApiService::class.java)
     }
+    single { UserDetailMapper() }
     single<AppDatabase> { getDatabase(androidContext()) }
     single<UserDao> { get<AppDatabase>().userDao() }
     single<UserDetailDao> { get<AppDatabase>().userDetailDao() }
     factory<GetUsersRepo> { GetUsersRepoImpl(get(), get()) }
-    factory<GetUserDetailRepo> { GetUserDetailRepoImpl(get(), get()) }
+    factory<GetUserDetailRepo> { GetUserDetailRepoImpl(get(), get(), get()) }
 }

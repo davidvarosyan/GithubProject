@@ -9,7 +9,7 @@ import com.varosyan.data.db.entity.UserDetailEntity
 @Dao
 interface UserDetailDao {
     @Query("SELECT * FROM user_details WHERE userName = :userName")
-    suspend fun getById(userName: Int): UserDetailEntity?
+    suspend fun getById(userName: String): UserDetailEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(detail: UserDetailEntity)

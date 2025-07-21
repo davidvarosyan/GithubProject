@@ -1,7 +1,6 @@
 package com.varosyan.data.model
 
 import com.google.gson.annotations.SerializedName
-import com.varosyan.domain.model.UserDetail
 
 data class UserDetailModel(
     @SerializedName("id") val id: Int,
@@ -15,18 +14,4 @@ data class UserDetailModel(
     @SerializedName("public_repos") val repoCount: Int?,
     @SerializedName("public_gists") val gistCount: Int?,
     @SerializedName("updated_at") val lastUpdated: String?
-)
-
-fun UserDetailModel.toUserDetail(): UserDetail = UserDetail(
-    id,
-    avatar,
-    username,
-    fullName,
-    location,
-    followersCount,
-    followingCount,
-    bio,
-    repoCount,
-    gistCount,
-    lastUpdated
 )

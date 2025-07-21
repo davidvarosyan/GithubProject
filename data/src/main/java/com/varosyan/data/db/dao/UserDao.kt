@@ -19,7 +19,7 @@ interface UserDao {
   """
     )
     suspend fun getUsersFromId(
-        startId: Int,
+        startId: Long,
         count: Int
     ): List<UserEntity>
 

@@ -1,33 +1,41 @@
 package com.varosyan.data.repo
 
 import com.varosyan.data.db.dao.UserDetailDao
-import com.varosyan.data.db.entity.UserDetailEntity
-import com.varosyan.data.model.toUserDetail
+import com.varosyan.data.mapper.UserDetailMapper
 import com.varosyan.data.service.UserDetailApiService
+import com.varosyan.domain.common.Result
+import com.varosyan.domain.common.safeCall
 import com.varosyan.domain.model.UserDetail
 import com.varosyan.domain.repo.GetUserDetailRepo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class GetUserDetailRepoImpl(
     private val userDetailApiService: UserDetailApiService,
-    private val userDetailDao: UserDetailDao
+    private val userDetailDao: UserDetailDao,
+    private val userDetailMapper: UserDetailMapper
 ) : GetUserDetailRepo {
-    override suspend fun invoke(username: String): UserDetail {
-        val result = userDetailApiService.getUserDetail(username).toUserDetail()
-        userDetailDao.upsert(
-            UserDetailEntity(
-                result.id,
-                result.avatar,
-                result.userName,
-                result.fullName,
-                result.location,
-                result.followersCount,
-                result.followingCount,
-                result.bio,
-                result.repoCount,
-                result.gistCount,
-                result.lastUpdated
-            )
-        )
-        return result
+    override suspend fun invoke(username: String): Result<UserDetail> {
+        return safeCall {
+            userDetailMapper.userDetailModelToUserDetail(userDetailApiService.getUserDetail(username))
+        }.fold(onError = {
+            return safeCall {
+                userDetailMapper.userDetailEntityToUserDetail(
+                    userDetailDao.getById(
+                        userName = username
+                    )
+                )
+            }
+        }, onSuccess = { result ->
+            coroutineScope {
+                launch(Dispatchers.IO) {
+                    userDetailDao.upsert(
+                        userDetailMapper.userDetailToUserDetailEntity(result)
+                    )
+                }
+            }
+            return Result.Success(result)
+        })
     }
 }

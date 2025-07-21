@@ -13,14 +13,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 
 class UserListViewModel(private val getUsersUseCase: GetUsersUseCase) : ViewModel() {
-
-
     val users: Flow<PagingData<User>> = Pager(
         config = PagingConfig(pageSize = 50, initialLoadSize = 50),
         pagingSourceFactory = { UserPagingSource(getUsersUseCase) }
     ).flow
         .flowOn(Dispatchers.IO)
         .cachedIn(viewModelScope)
-
-
 }
