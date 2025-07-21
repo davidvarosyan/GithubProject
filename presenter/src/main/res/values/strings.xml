@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="bio">Bio:</string>
+    <string name="public_repositories">Public repositories:</string>
+    <string name="public_gists">Public gists:</string>
+    <string name="updated_at">Updated at:</string>
+</resources>

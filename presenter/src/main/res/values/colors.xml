@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tint">#888888</color>
+    <color name="text_color">#888888</color>
+    <color name="text_title_2">#555555</color>
+    <color name="divider_background">#EEEEEE</color>
+</resources>
