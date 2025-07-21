@@ -88,6 +88,7 @@ class UserDetailFragment : Fragment(R.layout.fragment_user_detail) {
     }
 
     private fun showErrorMessage(message: String) {
+        viewBinding.progressCircular.visibility = View.GONE
         viewBinding.contentContainer.visibility = View.GONE
         viewBinding.textError.visibility = View.VISIBLE
         viewBinding.textError.text = message

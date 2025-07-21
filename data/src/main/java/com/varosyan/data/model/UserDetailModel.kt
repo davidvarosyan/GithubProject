@@ -3,7 +3,7 @@ package com.varosyan.data.model
 import com.google.gson.annotations.SerializedName
 
 data class UserDetailModel(
-    @SerializedName("id") val id: Int,
+    @SerializedName("id") val id: Long,
     @SerializedName("avatar_url") val avatar: String,
     @SerializedName("login") val username: String,
     @SerializedName("name") val fullName: String?,

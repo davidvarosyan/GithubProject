@@ -22,7 +22,7 @@ class GetUsersRepoImpl(private val userApiService: UserApiService, private val u
             onSuccess = { users ->
                 coroutineScope {
                     launch(Dispatchers.IO) {
-                        userDao.upsertAll(users.map { UserEntity(it.id, it.avatar, it.userName) })
+                        userDao.upsertAll(users.map { UserEntity(it.id, it.userName, it.avatar) })
                     }
                 }
                 Result.Success(users)

@@ -1,7 +1,7 @@
 package com.varosyan.domain.model
 
 data class UserDetail(
-    val id: Int,
+    val id: Long,
     val avatar: String,
     val userName: String,
     val fullName: String?,
