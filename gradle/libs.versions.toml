@@ -13,9 +13,7 @@ ksp = "2.2.10-2.0.2"
 
 
 koin = "4.1.1"
-retrofit = "3.0.0"
 room = "2.8.3"
-okhttp = "5.2.1"
 glide = "5.0.5"
 paging = "3.3.6"
 gson = "2.13.2"
@@ -32,12 +30,6 @@ material = { group = "com.google.android.material", name = "material", version.r
 
 # DI
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
-
-# Networking
-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 # Persistence
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
