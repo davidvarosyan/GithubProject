@@ -1,17 +1,19 @@
 package com.varosyan.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class UserDetailModel(
-    @SerializedName("id") val id: Long,
-    @SerializedName("avatar_url") val avatar: String,
-    @SerializedName("login") val username: String,
-    @SerializedName("name") val fullName: String?,
-    @SerializedName("location") val location: String?,
-    @SerializedName("followers") val followersCount: Int,
-    @SerializedName("following") val followingCount: Int,
-    @SerializedName("bio") val bio: String?,
-    @SerializedName("public_repos") val repoCount: Int?,
-    @SerializedName("public_gists") val gistCount: Int?,
-    @SerializedName("updated_at") val lastUpdated: String?
+    @SerialName("id") val id: Long,
+    @SerialName("avatar_url") val avatar: String,
+    @SerialName("login") val username: String,
+    @SerialName("name") val fullName: String?,
+    @SerialName("location") val location: String?,
+    @SerialName("followers") val followersCount: Int,
+    @SerialName("following") val followingCount: Int,
+    @SerialName("bio") val bio: String?,
+    @SerialName("public_repos") val repoCount: Int?,
+    @SerialName("public_gists") val gistCount: Int?,
+    @SerialName("updated_at") val lastUpdated: String?
 )
