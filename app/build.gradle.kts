@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.safe.args)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
 }
 
@@ -43,16 +43,25 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.ui)
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
-    implementation(project(":presenter"))
-    implementation(project(":domain"))
-    implementation(project(":data"))
-    implementation(libs.ktor.client.core)
-    implementation(libs.room.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+
+    implementation(libs.hilt.android)
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    ksp(libs.hilt.compiler)
+    implementation(libs.ktor.client.core)
+    implementation(libs.room.ktx)
+
+    implementation(project(":presenter"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
 }

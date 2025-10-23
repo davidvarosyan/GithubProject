@@ -1,7 +1,30 @@
 package com.varosyan.github
 
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import com.varosyan.github.theme.GithubTheme
+import com.varosyan.presenter.navigation.GithubNavigation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GithubActivity : AppCompatActivity(R.layout.github_activity)
+class GithubActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            GithubTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    GithubNavigation()
+                }
+            }
+        }
+    }
+}

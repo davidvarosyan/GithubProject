@@ -20,24 +20,59 @@ class UserDetailViewModel @Inject constructor(
     private val getUserDetailUseCase: GetUserDetailUseCase
 ) : ViewModel() {
 
-    lateinit var  username: String
+    private val _uiState = MutableStateFlow(UserDetailUiState())
+    val uiState: StateFlow<UserDetailUiState> = _uiState.asStateFlow()
 
-    private val _userDetail: MutableSharedFlow<UserDetail> = MutableSharedFlow()
-    val userDetail: SharedFlow<UserDetail> = _userDetail.asSharedFlow()
-    private val _loadingState: MutableStateFlow<DetailScreenState> =
-        MutableStateFlow(DetailScreenState.Loading)
-    val loadingState: StateFlow<DetailScreenState> = _loadingState.asStateFlow()
+    private val _effects = MutableSharedFlow<UserDetailEffect>()
+    val effects: SharedFlow<UserDetailEffect> = _effects.asSharedFlow()
 
-    init {
+    private var username: String = ""
+
+    fun initialize(username: String) {
+        this.username = username
+        _uiState.value = _uiState.value.copy(isLoading = true)
+        handleIntent(UserDetailIntent.LoadUserDetail)
+    }
+
+    fun handleIntent(intent: UserDetailIntent) {
+        when (intent) {
+            is UserDetailIntent.LoadUserDetail -> loadUserDetail()
+            is UserDetailIntent.Retry -> retry()
+            is UserDetailIntent.ClearError -> clearError()
+        }
+    }
+
+    private fun loadUserDetail() {
         viewModelScope.launch(Dispatchers.IO) {
             getUserDetailUseCase(username).safeHandle<UserDetail, Unit>(
-                success = {
-                    _userDetail.emit(it)
-                    _loadingState.emit(value = DetailScreenState.Success)
+                success = { userDetail ->
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        userDetail = userDetail,
+                        error = null
+                    )
                 },
                 handleError = { exception ->
-                    _loadingState.emit(value = DetailScreenState.Error(exception.message.toString()))
-                })
+                    val errorMessage = exception.message ?: "An error occurred"
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = errorMessage
+                    )
+                    _effects.emit(UserDetailEffect.ShowError(errorMessage))
+                }
+            )
         }
+    }
+
+    private fun retry() {
+        _uiState.value = _uiState.value.copy(
+            isLoading = true,
+            error = null
+        )
+        loadUserDetail()
+    }
+
+    private fun clearError() {
+        _uiState.value = _uiState.value.copy(error = null)
     }
 }
