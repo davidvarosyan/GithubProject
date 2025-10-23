@@ -11,8 +11,12 @@ import com.varosyan.domain.repo.GetUsersRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GetUsersRepoImpl(private val userApiService: UserApiService, private val userDao: UserDao) :
+class GetUsersRepoImpl @Inject constructor(
+    private val userApiService: UserApiService,
+    private val userDao: UserDao
+) :
     GetUsersRepo {
     override suspend fun invoke(id: Long): Result<List<User>> {
         return safeCall {

@@ -10,8 +10,9 @@ import com.varosyan.domain.repo.GetUserDetailRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GetUserDetailRepoImpl(
+class GetUserDetailRepoImpl @Inject constructor(
     private val userDetailApiService: UserDetailApiService,
     private val userDetailDao: UserDetailDao,
     private val userDetailMapper: UserDetailMapper

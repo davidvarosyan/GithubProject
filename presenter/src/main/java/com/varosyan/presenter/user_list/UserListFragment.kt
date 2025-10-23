@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -12,13 +13,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.varosyan.presenter.R
 import com.varosyan.presenter.databinding.FragmentUserListBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
 
+@AndroidEntryPoint
 class UserListFragment : Fragment(R.layout.fragment_user_list) {
-    private val viewModel: UserListViewModel by viewModel()
+    private val viewModel: UserListViewModel by viewModels ()
     private lateinit var viewBinding: FragmentUserListBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

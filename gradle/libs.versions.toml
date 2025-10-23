@@ -10,9 +10,10 @@ material = "1.13.0"
 ktor = "3.3.1"
 kotlinx-serialization = "1.9.0"
 ksp = "2.2.10-2.0.2"
+hilt = '2.57.2'
+javax-inject-version = '1'
 
 
-koin = "4.1.1"
 room = "2.8.3"
 glide = "5.0.5"
 paging = "3.3.6"
@@ -28,8 +29,6 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
-# DI
-koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 
 # Persistence
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -55,6 +54,13 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
+#hilt
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inject-version" }
+
+
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -62,5 +68,6 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-serializer = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref = "safe-args" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 

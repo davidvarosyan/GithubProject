@@ -3,8 +3,9 @@ package com.varosyan.data.mapper
 import com.varosyan.data.db.entity.UserDetailEntity
 import com.varosyan.data.model.UserDetailModel
 import com.varosyan.domain.model.UserDetail
+import javax.inject.Inject
 
-class UserDetailMapper {
+class UserDetailMapper @Inject constructor() {
 
     fun userDetailModelToUserDetail(userDetailModel: UserDetailModel): UserDetail {
         return UserDetail(
