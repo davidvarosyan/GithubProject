@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import coil.load
+import coil.size.Scale
 import com.varosyan.domain.model.User
 import com.varosyan.presenter.R
 import com.varosyan.presenter.databinding.ItemUserBinding
@@ -46,12 +46,12 @@ class UserAdapter(
         fun bind(user: User) {
             login.text = user.userName
             idView.text = "ID: ${user.id}"
-            Glide.with(avatar)
-                .load(user.avatar)
-                .placeholder(R.drawable.account_circle)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .circleCrop()
-                .into(avatar)
+
+            avatar.load(user.avatar) {
+                placeholder(R.drawable.account_circle)
+                crossfade(true)
+                scale(Scale.FILL)
+            }
             binding.arrowImageView.setOnClickListener { onClick(user) }
         }
     }

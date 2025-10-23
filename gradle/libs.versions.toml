@@ -15,11 +15,10 @@ javax-inject-version = '1'
 
 
 room = "2.8.3"
-glide = "5.0.5"
 paging = "3.3.6"
-gson = "2.13.2"
 navigation = "2.9.5"
 safe-args = "2.9.5"
+coil = '2.7.0'
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,9 +33,6 @@ material = { group = "com.google.android.material", name = "material", version.r
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
-
-# Image loading
-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 
 #Paging Library
 paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
@@ -58,6 +54,9 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inject-version" }
+
+#coil
+coil-core = {module = "io.coil-kt:coil",version.ref = "coil"}
 
 
 

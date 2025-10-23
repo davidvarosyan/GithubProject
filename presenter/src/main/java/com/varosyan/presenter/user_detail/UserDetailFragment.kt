@@ -8,8 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import coil.load
+import coil.size.Scale
 import com.varosyan.presenter.R
 import com.varosyan.presenter.databinding.FragmentUserDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,12 +68,11 @@ class UserDetailFragment : Fragment(R.layout.fragment_user_detail) {
                         formatter.format(instant)
                         updatedTextView.text = formatter.format(instant)
                     } ?: run { updatedTextView.text = NO_INFO }
-                    Glide.with(avatarImageView)
-                        .load(detail.avatar)
-                        .placeholder(R.drawable.account_circle)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .circleCrop()
-                        .into(avatarImageView)
+                    avatarImageView.load(detail.avatar) {
+                        placeholder(R.drawable.account_circle)
+                        crossfade(true)
+                        scale(Scale.FILL)
+                    }
                 }
             }
         }
